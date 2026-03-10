@@ -43,9 +43,8 @@ ABOUT
 **KATEGORI**
 
 <img width="1920" height="1080" alt="Cuplikan layar 2026-03-10 212339" src="https://github.com/user-attachments/assets/a8f444af-6654-4599-8d38-bb050deaff51" />
-<img width="1920" height="1080" alt="Cuplikan layar 2026-03-10 212356" src="https://github.com/user-attachments/assets/db8e1320-2f84-47f6-a7f1-25e0b492da79" />
 
 **PRODUK**
 
 <img width="1920" height="1080" alt="Cuplikan layar 2026-03-10 212348" src="https://github.com/user-attachments/assets/140a4cae-7a58-4c8b-8a09-fde2ed77c3e3" />
-
+<img width="1920" height="1080" alt="Cuplikan layar 2026-03-10 212356" src="https://github.com/user-attachments/assets/db8e1320-2f84-47f6-a7f1-25e0b492da79" />
