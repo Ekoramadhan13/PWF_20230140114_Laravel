@@ -1,22 +1,12 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
-
 class StoreProductRequest extends FormRequest
 {
-    /**
-     * Tentukan apakah user berhak melakukan request ini
-     */
-    public function authorize(): bool
+     public function authorize(): bool
     {
-        return true; // ✅ izinkan semua user yang sudah login
+        return true; 
     }
-
-    /**
-     * Aturan validasi untuk store (tambah produk)
-     */
     public function rules(): array
     {
         return [
@@ -26,10 +16,6 @@ class StoreProductRequest extends FormRequest
             'user_id'  => 'nullable|exists:users,id',
         ];
     }
-
-    /**
-     * Pesan error kustom dalam Bahasa Indonesia
-     */
     public function messages(): array
     {
         return [

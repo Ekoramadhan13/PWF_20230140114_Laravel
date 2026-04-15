@@ -1,22 +1,14 @@
 <?php
-
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
 {
-    /**
-     * Tentukan apakah user berhak melakukan request ini
-     */
+    
     public function authorize(): bool
     {
         return true;
     }
-
-    /**
-     * Aturan validasi untuk update (edit produk)
-     */
     public function rules(): array
     {
         return [
@@ -25,10 +17,6 @@ class UpdateProductRequest extends FormRequest
             'price'    => 'required|numeric|min:0',
         ];
     }
-
-    /**
-     * Pesan error kustom dalam Bahasa Indonesia
-     */
     public function messages(): array
     {
         return [
