@@ -109,3 +109,30 @@ ABOUT
 
 <img width="1920" height="1080" alt="Cuplikan layar 2026-04-09 122015" src="https://github.com/user-attachments/assets/10a81c77-0924-42dd-a69d-e7015c16b594" />
 
+
+
+***TUGAS 6***
+
+
+
+***Test Validasi***
+
+
+**Test Store (Add Product)**
+
+<img width="1920" height="1080" alt="Cuplikan layar 2026-04-15 212850" src="https://github.com/user-attachments/assets/feee3456-6ae7-450c-bc42-3e045575d148" />
+
+
+**Isi nama dengan 1 huruf saja**
+
+<img width="1920" height="1080" alt="Cuplikan layar 2026-04-15 212956" src="https://github.com/user-attachments/assets/194548c0-8cf1-4ceb-a803-4198156cfdec" />
+
+
+**Isi harga dengan angka negatif**
+
+<img width="1920" height="1080" alt="Cuplikan layar 2026-04-15 213011" src="https://github.com/user-attachments/assets/db8e7353-9385-4510-bf63-31a01b30491f" />
+
+
+**Test Update (Edit Product)**
+
+<img width="1920" height="1080" alt="Cuplikan layar 2026-04-15 214540" src="https://github.com/user-attachments/assets/82e303b4-c86b-4541-aaf4-9aa4e44572ff" />
