@@ -12,8 +12,19 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', 'Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                navy: {
+                    950: '#0b1120', // Matte deep background
+                    900: '#1e293b', // Card surface
+                    800: '#334155', // Borders/Hover
+                },
+                brand: {
+                    primary: '#4f46e5', // Solid Indigo
+                    secondary: '#6366f1',
+                }
+            }
         },
     },
 

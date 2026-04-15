@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate; // ✅ tambahkan ini
+use App\Http\Requests\StoreProductRequest;   // ✅ tambahkan
+use App\Http\Requests\UpdateProductRequest;  // ✅ tambahkan
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -17,29 +18,27 @@ class ProductController extends Controller
 
     public function create()
     {
-        $users = User::orderBy('name')->get(); 
+        $users = User::orderBy('name')->get();
         return view('product.create', compact('users'));
     }
 
-    public function store(Request $request)
+    // ✅ Ganti Request biasa dengan StoreProductRequest
+    public function store(StoreProductRequest $request)
     {
-         $validated = $request->validate([
-        'name'     => 'required|string|max:255',
-        'quantity' => 'required|integer',
-        'price'    => 'required|numeric',
-    ]);
+        // Validasi sudah otomatis dijalankan oleh StoreProductRequest
+        $validated = $request->validated();
 
-    $validated['qty'] = $validated['quantity'];
-    unset($validated['quantity']);
+        // mapping quantity -> qty
+        $validated['qty'] = $validated['quantity'];
+        unset($validated['quantity']);
 
-    // ✅ Jika admin memilih owner dari dropdown, pakai itu
-    // Jika tidak, pakai user yang sedang login
-    $validated['user_id'] = $request->input('user_id') ?? auth()->id();
+        // user_id dari dropdown jika admin memilih, atau dari yang login
+        $validated['user_id'] = $request->input('user_id') ?? auth()->id();
 
-    Product::create($validated);
+        Product::create($validated);
 
-    return redirect()->route('product.index')
-        ->with('success', 'Product created successfully.');
+        return redirect()->route('product.index')
+            ->with('success', 'Product created successfully.');
     }
 
     public function show($id)
@@ -50,26 +49,23 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        // ✅ Ganti $this->authorize() dengan Gate::authorize()
         Gate::authorize('update', $product);
 
         $users = User::orderBy('name')->get();
         return view('product.edit', compact('product', 'users'));
     }
 
-    public function update(Request $request, $id)
+    // ✅ Ganti Request biasa dengan UpdateProductRequest
+    public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
 
-        // ✅ Ganti $this->authorize() dengan Gate::authorize()
         Gate::authorize('update', $product);
 
-        $validated = $request->validate([
-            'name'     => 'sometimes|string|max:255',
-            'quantity' => 'sometimes|integer',
-            'price'    => 'sometimes|numeric',
-        ]);
+        // Validasi sudah otomatis dijalankan oleh UpdateProductRequest
+        $validated = $request->validated();
 
+        // mapping quantity -> qty
         if (isset($validated['quantity'])) {
             $validated['qty'] = $validated['quantity'];
             unset($validated['quantity']);
@@ -85,7 +81,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        // ✅ Ganti $this->authorize() dengan Gate::authorize()
         Gate::authorize('delete', $product);
 
         $product->delete();

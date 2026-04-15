@@ -1,137 +1,79 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+    <div class="py-20 min-h-screen bg-navy-950 flex items-center justify-center">
+        <div class="max-w-3xl w-full px-4 sm:px-6 lg:px-8">
+            <div class="bg-navy-900 border border-white/5 shadow-2xl rounded-[2rem] overflow-hidden">
+                <div class="p-12">
 
                     {{-- Header --}}
-                    <div class="flex items-center gap-3 mb-6">
+                    <div class="flex items-start gap-6 mb-12">
                         <a href="{{ route('product.show', $product) }}"
-                            class="p-1.5 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
+                            class="mt-1 text-gray-500 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                             </svg>
                         </a>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">Edit Product</h2>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Update details for <span
-                                    class="font-medium text-gray-700 dark:text-gray-300">{{ $product->name }}</span></p>
+                            <h1 class="text-3xl font-bold text-white tracking-tight">Edit Product</h1>
+                            <p class="text-gray-500 mt-1 text-lg">Update details for <span class="text-brand-primary font-bold">{{ $product->name }}</span></p>
                         </div>
                     </div>
 
-                    <form id="delete-product-form" action="{{ route('product.delete', $product->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                    </form>
-
                     {{-- Form --}}
-                    <form action="{{ route('product.update', $product) }}" method="POST" class="space-y-5">
+                    <form action="{{ route('product.update', $product->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
                         {{-- Name --}}
-                        <div>
-                            <label for="name"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Product Name <span class="text-red-500">*</span>
+                        <div class="mb-8">
+                            <label for="name" class="block text-sm font-bold text-gray-300 mb-3">
+                                Nama Produk
                             </label>
-                            <input type="text" id="name" name="name"
-                                value="{{ old('name', $product->name) }}" placeholder="e.g. Wireless Headphones"
-                                class="w-full px-4 py-2.5 rounded-lg border text-sm
-                                {{ $errors->has('name') ? 'border-red-400 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700' }}
-                                text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500
-                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                            <input type="text" id="name" name="name" value="{{ old('name', $product->name) }}"
+                                placeholder="e.g. Wireless Headphones"
+                                class="w-full px-5 py-4 rounded-xl border border-white/10 bg-navy-950/50 text-white focus:border-brand-primary focus:ring-0 transition-all placeholder-gray-600">
                             @error('name')
-                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                                <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        {{-- Quantity & Price --}}
-                        <div class="grid grid-cols-2 gap-4">
+                        {{-- Quantity & Price Grid --}}
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
                             <div>
-                                <label for="quantity"
-                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Quantity <span class="text-red-500">*</span>
+                                <label for="quantity" class="block text-sm font-bold text-gray-300 mb-3">
+                                    Quantity
                                 </label>
-                                <input type="number" id="quantity" name="quantity"
-                                    value="{{ old('quantity', $product->quantity) }}" placeholder="0" min="0"
-                                    class="w-full px-4 py-2.5 rounded-lg border text-sm
-                                    {{ $errors->has('quantity') ? 'border-red-400 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700' }}
-                                    text-gray-900 dark:text-gray-100 placeholder-gray-400
-                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                                <input type="number" id="quantity" name="quantity" value="{{ old('quantity', $product->qty) }}"
+                                    placeholder="0"
+                                    class="w-full px-5 py-4 rounded-xl border border-white/10 bg-navy-950/50 text-white focus:border-brand-primary focus:ring-0 transition-all placeholder-gray-600">
                                 @error('quantity')
-                                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                                    <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div>
-                                <label for="price"
-                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Price (Rp) <span class="text-red-500">*</span>
+                                <label for="price" class="block text-sm font-bold text-gray-300 mb-3">
+                                    Price (Rp)
                                 </label>
-                                <input type="number" id="price" name="price"
-                                    value="{{ old('price', $product->price) }}" placeholder="0" min="0"
-                                    step="0.01"
-                                    class="w-full px-4 py-2.5 rounded-lg border text-sm
-                                    {{ $errors->has('price') ? 'border-red-400 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700' }}
-                                    text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500
-                                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                                <input type="number" id="price" name="price" value="{{ old('price', $product->price) }}"
+                                    placeholder="0"
+                                    class="w-full px-5 py-4 rounded-xl border border-white/10 bg-navy-950/50 text-white focus:border-brand-primary focus:ring-0 transition-all placeholder-gray-600">
                                 @error('price')
-                                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                                    <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
-
-                        {{-- User --}}
-                        <div>
-                            <label for="user_id"
-                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                Owner <span class="text-red-500">*</span>
-                            </label>
-                            <select id="user_id" name="user_id"
-                                class="w-full px-4 py-2.5 rounded-lg border text-sm
-                                {{ $errors->has('user_id') ? 'border-red-400 bg-red-50 dark:bg-red-900/20' : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700' }}
-                                text-gray-900 dark:text-gray-100
-                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
-                                <option value="">Select Owner</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        {{ old('user_id', $product->user_id) == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('user_id')
-                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         {{-- Actions --}}
-                        <div class="flex items-center justify-between pt-2">
+                        <div class="flex items-center justify-end gap-5">
+                            <a href="{{ route('product.show', $product) }}"
+                                class="px-10 py-4 text-white font-semibold rounded-2xl border border-white/10 hover:bg-white/5 transition-all">
+                                Cancel
+                            </a>
                             <button type="submit"
-                                onclick="return confirm('Are you sure you want to delete this product?');"
-                                form="delete-product-form"
-                                class="inline-flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6M9 7h1m-1 0a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                                Delete Product
+                                class="px-10 py-4 bg-brand-primary hover:bg-brand-secondary text-white font-bold rounded-2xl transition-all shadow-xl shadow-brand-primary/20">
+                                Update Product
                             </button>
-
-                            <div class="flex items-center gap-3">
-                                <a href="{{ route('product.show', $product) }}"
-                                    class="px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                                    Cancel
-                                </a>
-                                <button type="submit"
-                                    class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition">
-                                    Update Product
-                                </button>
-                            </div>
                         </div>
 
                     </form>
@@ -140,4 +82,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-app-layout>

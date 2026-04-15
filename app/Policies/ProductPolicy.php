@@ -8,7 +8,7 @@ use App\Models\User;
 class ProductPolicy
 {
     /**
-     * Hanya pemilik produk yang bisa update
+     * Admin dan User hanya bisa edit produk miliknya sendiri
      */
     public function update(User $user, Product $product): bool
     {

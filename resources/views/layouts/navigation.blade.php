@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-navy-950/90 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
 
@@ -36,7 +36,7 @@
                 <x-dropdown align="right" width="48">
 
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition">
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-semibold text-gray-300 hover:text-white focus:outline-none transition">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
@@ -104,12 +104,12 @@
         </div>
 
         <!-- USER MOBILE -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+        <div class="pt-4 pb-1 border-t border-navy-700/50 bg-navy-800/30">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">
+                <div class="font-semibold text-base text-white">
                     {{ Auth::user()->name }}
                 </div>
-                <div class="font-medium text-sm text-gray-500">
+                <div class="font-medium text-sm text-gray-400">
                     {{ Auth::user()->email }}
                 </div>
             </div>

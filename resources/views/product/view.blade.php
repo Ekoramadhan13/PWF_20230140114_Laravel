@@ -1,119 +1,95 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+    <div class="py-20 min-h-screen bg-navy-950 flex justify-center px-4">
+        <div class="max-w-4xl w-full">
+            
+            {{-- Navigation Back --}}
+            <div class="mb-10">
+                <a href="{{ route('product.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span class="font-bold tracking-tight">Back to Inventory</span>
+                </a>
+            </div>
 
-                    {{-- Header --}}
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center gap-3">
-                            <a href="{{ route('product.index') }}"
-                                class="p-1.5 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </a>
-                            <div>
-                                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">Product
-                                    Detail</h2>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Viewing product
-                                    #{{ $product->id }}</p>
+            <div class="bg-navy-900 border border-white/5 shadow-2xl rounded-[2.5rem] overflow-hidden">
+                {{-- Detail Banner --}}
+                <div class="h-48 bg-navy-800 relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-transparent"></div>
+                    <div class="absolute bottom-10 left-12">
+                        <h1 class="text-4xl font-black text-white tracking-tighter">{{ $product->name }}</h1>
+                        <p class="text-gray-400 mt-2 font-medium">Product Detailed Specifications</p>
+                    </div>
+                </div>
+
+                <div class="p-12">
+                    {{-- Stats Grid --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        {{-- Stock Card --}}
+                        <div class="p-8 bg-navy-950/50 border border-white/5 rounded-3xl group hover:border-brand-primary transition-all">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-black text-gray-500 uppercase tracking-widest">Available Stock</span>
+                                <div class="p-2 bg-brand-primary/10 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                    </svg>
+                                </div>
                             </div>
+                            <div class="text-4xl font-black text-white">{{ $product->qty }} <span class="text-sm font-bold text-gray-500 uppercase">Units</span></div>
                         </div>
 
-                        {{-- Action Buttons --}}
-                        <div class="flex items-center gap-2">
-                            <a href="{{ route('product.edit', $product) }}"
-                                class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-amber-300 dark:border-amber-600 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
-                                Edit
-                            </a>
-                            <form action="{{ route('product.delete', $product->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this product?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-red-300 dark:border-red-600 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 transition">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6M9 7h1m-1 0a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" />
+                        {{-- Price Card --}}
+                        <div class="p-8 bg-navy-950/50 border border-white/5 rounded-3xl group hover:border-green-500 transition-all">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs font-black text-gray-500 uppercase tracking-widest">Market Price</span>
+                                <div class="p-2 bg-green-500/10 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    Delete
-                                </button>
-                            </form>
+                                </div>
+                            </div>
+                            <div class="text-4xl font-black text-white">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
                         </div>
                     </div>
 
-                    {{-- Detail Card --}}
-                    <div
-                        class="rounded-lg border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
-
-                        {{-- Name --}}
-                        <div class="flex items-center px-5 py-4">
-                            <div class="w-32 shrink-0 text-sm text-gray-500 dark:text-gray-400">Product Name</div>
-                            <div class="text-sm font-semibold text-gray-800 dark:text-gray-100">{{ $product->name }}
-                            </div>
-                        </div>
-
-                        {{-- Quantity --}}
-                        <div class="flex items-center px-5 py-4">
-                            <div class="w-32 shrink-0 text-sm text-gray-500 dark:text-gray-400">Quantity</div>
-                            <div>
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    {{ $product->quantity > 10
-                                        ? 'bg-green-100 dark:bg-green-900/40 dark:text-green-300 text-green-800'
-                                        : 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300' }}">
-                                    {{ $product->quantity }}
-                                </span>
-                                {{ $product->quantity > 10 ? 'In Stock' : 'Low Stock' }}
-                            </div>
-                        </div>
-
-                        {{-- Price --}}
-                        <div class="flex items-center px-5 py-4">
-                            <div class="w-32 shrink-0 text-sm text-gray-500 dark:text-gray-400">Price</div>
-                            <div class="text-sm font-mono font-semibold text-gray-800 dark:text-gray-100">
-                                Rp {{ number_format($product->price, 0, ',', '.') }}
-                            </div>
-                        </div>
-
-                        {{-- Owner --}}
-                        <div class="flex items-center px-5 py-4">
-                            <div class="w-32 shrink-0 text-sm text-gray-500 dark:text-gray-400">Owner</div>
-                            <div class="flex items-center gap-2">
-                                <div
-                                    class="h-7 w-7 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-300 text-xs font-bold uppercase">
+                    {{-- Information Section --}}
+                    <div class="space-y-8 mb-12">
+                        <div class="pb-6 border-b border-white/5">
+                            <h3 class="text-sm font-black text-gray-500 uppercase tracking-widest mb-4">Ownership Information</h3>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-primary flex items-center justify-center text-white text-xl font-black">
                                     {{ substr($product->user->name ?? '?', 0, 1) }}
                                 </div>
-                                <span
-                                    class="text-sm text-gray-800 dark:text-gray-100">{{ $product->user->name ?? '-' }}</span>
+                                <div class="flex-1">
+                                    <p class="text-white font-bold leading-none">{{ $product->user->name ?? 'System Admin' }}</p>
+                                    <p class="text-gray-500 text-sm mt-1 uppercase font-bold tracking-tighter">{{ $product->user->role ?? 'Staff' }}</p>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        {{-- Created At --}}
-                        <div class="flex items-center px-5 py-4">
-                            <div class="w-32 shrink-0 text-sm text-gray-500 dark:text-gray-400">Created At</div>
-                            <div class="text-sm text-gray-600 dark:text-gray-300">
-                                {{ $product->created_at->format('d M Y, H:i') }}
-                            </div>
+                    {{-- Footer Actions --}}
+                    <div class="flex items-center justify-between pt-8 border-t border-white/5">
+                        <p class="text-gray-600 text-xs font-bold uppercase tracking-widest">Modified at: {{ $product->updated_at->format('M d, Y') }}</p>
+                        
+                        <div class="flex gap-4">
+                            @can('update', $product)
+                                <a href="{{ route('product.edit', $product) }}" 
+                                    class="px-8 py-3 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-brand-primary transition-all">
+                                    Edit Information
+                                </a>
+                            @endcan
+
+                            @can('delete', $product)
+                                <form action="{{ route('product.delete', $product->id) }}" method="POST" onsubmit="return confirm('Silahkan konfirmasi penghapusan produk ini')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="px-8 py-3 bg-red-500/10 border border-red-500/20 text-red-500 font-bold rounded-2xl hover:bg-red-500 hover:text-white transition-all">
+                                        Remove Product
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
-
-                        {{-- Updated At --}}
-                        <div class="flex items-center px-5 py-4">
-                            <div class="w-32 shrink-0 text-sm text-gray-500 dark:text-gray-400">Updated At</div>
-                            <div class="text-sm text-gray-600 dark:text-gray-300">
-                                {{ $product->updated_at->format('d M Y, H:i') }}
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
@@ -121,3 +97,4 @@
         </div>
     </div>
 </x-app-layout>
+ayout>
