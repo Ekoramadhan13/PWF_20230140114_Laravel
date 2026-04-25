@@ -38,6 +38,7 @@
                                 <th class="px-8 py-5 text-left text-xs font-bold text-gray-500 uppercase tracking-widest">Product</th>
                                 <th class="px-8 py-5 text-left text-xs font-bold text-gray-500 uppercase tracking-widest">Stock</th>
                                 <th class="px-8 py-5 text-left text-xs font-bold text-gray-500 uppercase tracking-widest">Price</th>
+                                <th class="px-8 py-5 text-left text-xs font-bold text-gray-500 uppercase tracking-widest">Category</th>
                                 <th class="px-8 py-5 text-left text-xs font-bold text-gray-500 uppercase tracking-widest">Owner</th>
                                 <th class="px-8 py-5 text-right text-xs font-bold text-gray-500 uppercase tracking-widest">Actions</th>
                             </tr>
@@ -66,6 +67,11 @@
                                     </td>
                                     <td class="px-8 py-6 text-sm text-gray-300 font-mono font-bold">
                                         Rp {{ number_format($product->price, 0, ',', '.') }}
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <span class="text-sm text-gray-400 font-medium bg-white/5 px-2 py-1 rounded-md">
+                                            {{ $product->category->name ?? 'Uncategorized' }}
+                                        </span>
                                     </td>
                                     <td class="px-8 py-6">
                                         <div class="flex items-center gap-2">

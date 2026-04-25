@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Category;
 use App\Http\Requests\StoreProductRequest;   // ✅ tambahkan
 use App\Http\Requests\UpdateProductRequest;  // ✅ tambahkan
 use Illuminate\Support\Facades\Gate;
@@ -12,14 +13,15 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::with(['user', 'category'])->paginate(10);
         return view('product.index', compact('products'));
     }
 
     public function create()
     {
         $users = User::orderBy('name')->get();
-        return view('product.create', compact('users'));
+        $categories = Category::orderBy('name')->get();
+        return view('product.create', compact('users', 'categories'));
     }
 
     // ✅ Ganti Request biasa dengan StoreProductRequest
@@ -52,7 +54,8 @@ class ProductController extends Controller
         Gate::authorize('update', $product);
 
         $users = User::orderBy('name')->get();
-        return view('product.edit', compact('product', 'users'));
+        $categories = Category::orderBy('name')->get();
+        return view('product.edit', compact('product', 'users', 'categories'));
     }
 
     // ✅ Ganti Request biasa dengan UpdateProductRequest

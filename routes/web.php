@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+    // ✅ ROUTE CATEGORY
+    Route::resource('category', CategoryController::class);
 });
 
 require __DIR__.'/auth.php';
