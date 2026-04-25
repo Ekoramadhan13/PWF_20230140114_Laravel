@@ -143,3 +143,12 @@ ABOUT
 
 <img width="1584" height="904" alt="image" src="https://github.com/user-attachments/assets/756e5738-47de-4b72-9414-30c1d0585db2" />
 
+
+
+***TUGAS 7***
+
+
+<img width="1920" height="1080" alt="Cuplikan layar 2026-04-24 210816" src="https://github.com/user-attachments/assets/d319f01a-c965-4af6-83f0-0bc9b97338fc" />
+
+
+<img width="1920" height="1080" alt="Cuplikan layar 2026-04-24 210855" src="https://github.com/user-attachments/assets/4dc72246-78e6-423f-9ec2-d09e730b844a" />
